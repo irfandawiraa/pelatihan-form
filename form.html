@@ -1,0 +1,277 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .bg-photo {
+      background-image: url("/left-layer.jpg");
+      background-size: 120%;
+      background-position: center;
+      filter: blur(2px);
+      min-height: 100vh;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .overlay {
+      margin-left: -100%;
+      width: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .overlay .ppframe {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .overlay .ppframe img {
+      width: 100%;
+
+    }
+
+    .left-col .content {
+      filter: blur(0px);
+    }
+
+    .right-col {
+      padding: 2rem 4rem;
+      background-color: #fffaf6;
+    }
+
+    .form-control,
+    .form-select {
+      padding: .8rem 1rem;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    input:read-only {
+      background-color: #fff !important;
+    }
+
+    .btn-submit {
+      background-color: #99A799;
+      color: #fff;
+    }
+
+    .option {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid" style="min-height: 100vh;">
+    <form method="post">
+      <div class="row" style="min-height: 100vh;">
+        <div class="col col-xl-5 p-0 d-flex" style="overflow: hidden;">
+          <div class="bg-photo"></div>
+          <div class="overlay">
+            <div class="ppframe">
+              <img src="/user_default.png" alt="" id="profileshow">
+            </div>
+            <div class="mt-3">
+              <input class="form-control form-control-sm" id="profilepict" type="file"
+                onchange="document.getElementById('profileshow').src = window.URL.createObjectURL(this.files[0])">
+            </div>
+          </div>
+        </div>
+        <div class="col col-xl-7 right-col d-flex flex-column justify-content-center">
+          <h1 style="font-weight: 800; text-align: center;">Let us know who you are.</h1>
+          <h4 class="mb-4" align='center'>Please fill the form below!</h4>
+          <div class="mb-3">
+            <label for="fullname" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="fullname" placeholder="">
+          </div>
+
+          <div class="mb-3">
+            <label for="nickname" class="form-label">Nickname</label>
+            <input type="text" class="form-control" id="nickname" placeholder="">
+          </div>
+
+          <div class="row">
+            <div class="col col-lg-5">
+              <div class="mb-3">
+                <label for="pob" class="form-label">Place of Birth</label>
+                <input type="text" class="form-control" id="pob" placeholder="">
+              </div>
+            </div>
+            <div class="col col-lg-5">
+              <div class="mb-3">
+                <label for="dob" class="form-label">Date of Birth</label>
+                <input type="date" class="form-control" id="dob" placeholder="" onchange="getage(this.value.substr(0, 4))">
+              </div>
+            </div>
+            <div class="col col-lg-2">
+              <div class="mb-3">
+                <label for="age" class="form-label">Age</label>
+                <input type="text" class="form-control" id="age" placeholder="" readonly>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="age" class="form-label">Gender</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="genderm">
+              <label class="form-check-label" for="genderm">
+                Male
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="genderf">
+              <label class="form-check-label" for="genderf">
+                Female
+              </label>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">City</label>
+            <select class="form-select" aria-label="Default select example" id="city">
+              <option selected disabled>Select Province</option>
+              <option value="Jakarta">Jakarta</option>
+              <option value="Surabaya">Surabaya</option>
+              <option value="Bandung">Bandung</option>
+              <option value="Yogyakarta">Yogyakarta</option>
+              <option value="Medan">Medan</option>
+              <option value="Balikpapan">Balikpapan</option>
+              <option value="Riau">Riau</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <div class="mb-3">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" class="form-control" id="email" placeholder="">
+              </div>
+            </div>
+            <div class="col">
+              <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="number" class="form-control" id="phone" placeholder="">
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="phone" class="form-label">Social Media</label>
+            <div class="input-group">
+              <select class="btn btn-outline-secondary dropdown-toggle" name="medsosopt" id="medsosopt">
+                <option value="facebook">Facebook</option>
+                <option value="instagram">Instagram</option>
+                <option value="twitter">Twitter</option>
+              </select>
+              <input type="text" class="form-control" id="sosmed">
+            </div>
+          </div><br>
+
+          <button class="btn btn-lg w-100 btn-submit" onclick="cekform()">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+
+  <script>
+    profilepict = document.getElementById('profilepict');
+    fullname = document.getElementById('fullname');
+    nickname = document.getElementById('nickname');
+    pob = document.getElementById('pob');
+    dob = document.getElementById('dob');
+    email = document.getElementById('email');
+    phone = document.getElementById('phone');
+    sosmed = document.getElementById('sosmed');
+    city = document.getElementById('city');
+    gender = document.getElementsByName('gender');
+
+    function getage(born) {
+      yearnow = new Date().getFullYear();
+      intnow = parseInt(yearnow);
+      intborn = parseInt(born);
+      age = intnow - intborn;
+
+      document.getElementById('age').value = age;
+
+      if (age < 18) {
+        alert('Sorry, age must be above 18');
+        return false;
+      } else if (age > 30) {
+        alert('Sorry, age must be below 30');
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+    function cekform() {
+      if (profilepict.value == '') {
+        alert('picture cannot be empty');
+        return false;
+      } else if (fullname.value == '' || fullname.value.length < 3) {
+        alert('full name cannot be empty and at least 3 characters');
+        return false;
+      } else if (nickname.value == '' || nickname.value.length < 3) {
+        alert('nickname cannot be empty and at least 3 characters');
+        return false;
+      } else if (pob.value == '') {
+        alert('place of birth cannot be empty');
+        return false;
+      } else if (dob.value == '') {
+        alert('place of birth cannot be empty');
+        return false;
+      } else if (email.value == '') {
+        alert('email cannot be empty');
+        return false;
+      } else if (phone.value == '' || phone.value.length < 4) {
+        alert('phone of birth cannot be empty and at least 4 characters');
+        return false;
+      } else if (sosmed.value == '') {
+        alert('Social media cannot be empty');
+        return false;
+      } else if (!(gender[0].checked || gender[1].checked)) {
+        alert('Gender must be selected');
+        return false;
+      } else if (city.value == '') {
+        alert('City must be selected');
+        return false;
+      } else {
+        return true;
+      }
+    }
+  </script>
+</body>
+
+</html>
